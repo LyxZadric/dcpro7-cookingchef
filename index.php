@@ -1,11 +1,37 @@
 <?php
-$title = "Poulet mariné";
-$img = "recipe-1.jpg";
-$description = "Recette classique du poulet mariné...";
-$nb_like = 12;
-$category = "Plat";
-$user = "François P.";
-$creationDate = new DateTime("2016-09-12");
+$liste_recettes = array();
+
+$liste_recettes[0] = array(
+    "title" => "Poulet mariné",
+    "img" => "recipe-1.jpg",
+    "description" => "Recette classique du poulet mariné...",
+    "nb_like" => 12,
+    "category" => "Plat",
+    "user" => "François P.",
+    "creationDate" => new DateTime("2016-09-12")
+);
+
+$liste_recettes[1] = array(
+    "title" => "Pancake chocolat banane",
+    "img" => "recipe-2.jpg",
+    "description" => "Délicieux pancake à la banane et au chocolat.",
+    "nb_like" => 42,
+    "category" => "Desert",
+    "user" => "Etienne H.",
+    "creationDate" => new DateTime("2016-09-10")
+);
+
+$liste_recettes[2] = array(
+    "title" => "Saumon Teriyaki",
+    "img" => "recipe-3.jpg",
+    "description" => "C'est bon le saumon :)",
+    "nb_like" => 95,
+    "category" => "Plat",
+    "user" => "François P.",
+    "creationDate" => new DateTime("2016-09-13")
+);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,15 +94,15 @@ $creationDate = new DateTime("2016-09-12");
                 <div class="col-md-4">
                     <article>
                         <a href="recipe-1.html">
-                            <img src="images/<?php echo $img; ?>" alt="<?php echo $title; ?>" class="img-responsive">
+                            <img src="images/<?php echo $liste_recettes[0]["img"]; ?>" alt="<?php echo $liste_recettes[0]["title"]; ?>" class="img-responsive">
                         </a>
-                        <h2><a href="recipe-1.html"><?php echo $title; ?></a></h2>
-                        <?php echo $description; ?>
+                        <h2><a href="recipe-1.html"><?php echo $liste_recettes[0]["title"]; ?></a></h2>
+                        <?php echo $liste_recettes[0]["description"]; ?>
                         <footer>
-                            <div class="label"><a href="#" class="like"><i class="fa fa-heart"></i></a> <?php echo $nb_like; ?></div>
-                            <div class="label"><i class="fa fa-cutlery"></i> <?php echo $category; ?></div>
-                            <div class="label"><i class="fa fa-user"></i> <?php echo $user; ?></div>
-                            <div class="label"><i class="fa fa-calendar"></i> <?php echo $creationDate->format("j M Y"); ?></div>
+                            <div class="label"><a href="#" class="like"><i class="fa fa-heart"></i></a> <?php echo $liste_recettes[0]["nb_like"]; ?></div>
+                            <div class="label"><i class="fa fa-cutlery"></i> <?php echo $liste_recettes[0]["category"]; ?></div>
+                            <div class="label"><i class="fa fa-user"></i> <?php echo $liste_recettes[0]["user"]; ?></div>
+                            <div class="label"><i class="fa fa-calendar"></i> <?php echo $liste_recettes[0]["creationDate"]->format("j M Y"); ?></div>
                         </footer>
                     </article>
                 </div>
