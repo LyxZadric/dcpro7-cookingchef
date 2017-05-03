@@ -4,6 +4,7 @@ function getAllRecettes() {
     $liste_recettes = array();
 
     $liste_recettes[0] = array(
+        "id" => 0,
         "title" => "Poulet mariné",
         "img" => "recipe-1.jpg",
         "description" => "Recette classique du poulet mariné...",
@@ -14,6 +15,7 @@ function getAllRecettes() {
     );
 
     $liste_recettes[1] = array(
+        "id" => 1,
         "title" => "Pancake chocolat banane",
         "img" => "recipe-2.jpg",
         "description" => "Délicieux pancake à la banane et au chocolat.",
@@ -24,6 +26,7 @@ function getAllRecettes() {
     );
 
     $liste_recettes[2] = array(
+        "id" => 2,
         "title" => "Saumon Teriyaki",
         "img" => "recipe-3.jpg",
         "description" => "C'est bon le saumon :)",
@@ -35,3 +38,14 @@ function getAllRecettes() {
     
     return $liste_recettes;
 }
+
+function getRecette($identifiant) {
+    $liste_recettes = getAllRecettes();
+    return $liste_recettes[$identifiant];
+}
+
+
+
+
+
+

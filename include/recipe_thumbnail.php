@@ -1,8 +1,8 @@
 <article>
-    <a href="recipe.php">
-        <img src="images/<?php echo $recette["img"]; ?>" alt="<?php echo $liste_recettes[0]["title"]; ?>" class="img-responsive">
+    <a href="recipe.php?id=<?php echo $recette["id"]; ?>">
+        <img src="images/<?php echo $recette["img"]; ?>" alt="<?php echo $recette["title"]; ?>" class="img-responsive">
     </a>
-    <h2><a href="recipe.php"><?php echo $recette["title"]; ?></a></h2>
+    <h2><a href="recipe.php?id=<?php echo $recette["id"]; ?>"><?php echo $recette["title"]; ?></a></h2>
     <?php echo $recette["description"]; ?>
     <footer>
         <div class="label"><a href="#" class="like"><i class="fa fa-heart"></i></a> <?php echo $recette["nb_like"]; ?></div>
