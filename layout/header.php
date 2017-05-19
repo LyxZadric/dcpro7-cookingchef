@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION["id"])) {
+    $current_user = getUser($_SESSION["id"]);
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
