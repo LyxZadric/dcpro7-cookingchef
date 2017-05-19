@@ -73,6 +73,7 @@ function getRecette($id) {
             utilisateur.nom AS utilisateur_nom,
             utilisateur.prenom AS utilisateur_prenom,
             CONCAT(utilisateur.prenom, ' ', LEFT(utilisateur.nom, 1), '.') AS username,
+            recette.categorie_id,
             categorie.libelle AS categorie,
             COUNT(utilisateur_like_recette.utilisateur_id) AS nb_likes
         FROM recette
@@ -90,27 +91,31 @@ function getRecette($id) {
     return $stmt->fetch();
 }
 
-function insertArticle($titre, $image, $contenu, $utilisateur_id, $categorie_id) {
+function insertRecette($titre, $image, $description_courte, $description, $nb_personnes, $utilisateur_id, $categorie_id) {
     global $connection;
 
-    $query = "INSERT INTO article (titre, image, contenu, date_creation, utilisateur_id, categorie_id) VALUES (:titre, :image, :contenu, NOW(), :utilisateur_id, :categorie_id);";
+    $query = "INSERT INTO recette (titre, image, description_courte, description, nb_personnes, date_creation, utilisateur_id, categorie_id) VALUES (:titre, :image, :description_courte, :description, :nb_personnes, NOW(), :utilisateur_id, :categorie_id);";
 
     $stmt = $connection->prepare($query);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":image", $image);
-    $stmt->bindParam(":contenu", $contenu);
+    $stmt->bindParam(":description_courte", $description_courte);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":nb_personnes", $nb_personnes);
     $stmt->bindParam(":utilisateur_id", $utilisateur_id);
     $stmt->bindParam(":categorie_id", $categorie_id);
     $stmt->execute();
 }
 
-function updateArticle($id, $titre, $image, $contenu, $categorie_id) {
+function updateRecette($id, $titre, $image, $description_courte, $description, $nb_personnes, $categorie_id) {
     global $connection;
 
-    $query = "UPDATE article SET
+    $query = "UPDATE recette SET
                 titre = :titre,
                 image = :image,
-                contenu = :contenu,
+                description_courte = :description_courte,
+                description = :description,
+                nb_personnes = :nb_personnes,
                 categorie_id = :categorie_id 
             WHERE id = :id
     ;";
@@ -118,16 +123,18 @@ function updateArticle($id, $titre, $image, $contenu, $categorie_id) {
     $stmt = $connection->prepare($query);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":image", $image);
-    $stmt->bindParam(":contenu", $contenu);
+    $stmt->bindParam(":description_courte", $description_courte);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":nb_personnes", $nb_personnes);
     $stmt->bindParam(":categorie_id", $categorie_id);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 }
 
-function deleteArticle($id) {
+function deleteRecette($id) {
     global $connection;
 
-    $query = "DELETE FROM article WHERE id = :id;";
+    $query = "DELETE FROM recette WHERE id = :id;";
 
     $stmt = $connection->prepare($query);
     $stmt->bindParam(":id", $id);

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../layout/header.php';
 $liste_categories = getAllCategories();
 ?>
 
-<h1>Ajouter un article</h1>
+<h1>Ajouter une recette</h1>
 
 <form action="insert_query.php" method="POST" enctype="multipart/form-data">
     <div class="form-group">
@@ -18,8 +18,16 @@ $liste_categories = getAllCategories();
         <input type="file" name="image" class="form-control" id="inputImage">
     </div>
     <div class="form-group">
-        <label for="inputContenu">Contenu</label>
-        <textarea name="contenu" class="form-control" id="inputContenu"></textarea>
+        <label for="inputDescriptionCourte">Description Courte</label>
+        <textarea name="description_courte" class="form-control" id="inputDescriptionCourte"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <textarea name="description" class="form-control" id="inputDescription"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputNbPersonnes">Nombre de personnes</label>
+        <input type="number" name="nb_personnes" class="form-control" id="inputNbPersonnes">
     </div>
     <div class="form-group">
         <label for="categorie">Catégorie</label>

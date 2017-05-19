@@ -7,9 +7,9 @@ function getAllCategories() {
         SELECT
             categorie.id,
             categorie.libelle,
-            COUNT(article.id) AS nb_articles
+            COUNT(recette.id) AS nb_recettes
         FROM categorie
-        LEFT JOIN article ON article.categorie_id = categorie.id
+        LEFT JOIN recette ON recette.categorie_id = categorie.id
         GROUP BY categorie.id;
     ";
 
@@ -26,9 +26,9 @@ function getCategorie($id) {
         SELECT
             categorie.id,
             categorie.libelle,
-            COUNT(article.id) AS nb_articles
+            COUNT(recette.id) AS nb_recettes
         FROM categorie
-        LEFT JOIN article ON article.categorie_id = categorie.id
+        LEFT JOIN recette ON recette.categorie_id = categorie.id
         WHERE categorie.id = :id
         GROUP BY categorie.id;
     ";

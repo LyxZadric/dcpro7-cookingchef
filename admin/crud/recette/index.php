@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../../security.php';
 require_once __DIR__ . '/../../../model/database.php';
 
-$liste_articles = getAllArticles();
+$liste_recettes = getAllRecettes();
 
 require_once __DIR__ . '/../../layout/header.php';
 ?>
 
-<h1>Gestion des articles</h1>
+<h1>Gestion des recettes</h1>
 
 <a href="insert_form.php" class="btn btn-success">
     <i class="fa fa-plus"></i>
@@ -26,26 +26,28 @@ require_once __DIR__ . '/../../layout/header.php';
     <thead>
         <tr>
             <th>Titre</th>
+            <th>Catégorie</th>
             <th>Date création</th>
             <th>Utilisateur</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($liste_articles as $article) : ?>
+        <?php foreach ($liste_recettes as $recette) : ?>
             <tr>
-                <td><?php echo $article["titre"]; ?></td>
-                <td><?php echo $article["date_creation_format"]; ?></td>
-                <td><?php echo $article["utilisateur"]; ?></td>
+                <td><?php echo $recette["titre"]; ?></td>
+                <td><?php echo $recette["categorie"]; ?></td>
+                <td><?php echo $recette["date_creation_format"]; ?></td>
+                <td><?php echo $recette["username"]; ?></td>
                 <td>
                     <form action="delete_query.php" method="POST">
-                        <input type="hidden" name="id" value="<?php echo $article["id"] ?>">
+                        <input type="hidden" name="id" value="<?php echo $recette["id"] ?>">
                         <button type="submit" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                             Supprimer
                         </button>
                     </form>
-                    <a href="update_form.php?id=<?php echo $article["id"]; ?>" class="btn btn-warning">
+                    <a href="update_form.php?id=<?php echo $recette["id"]; ?>" class="btn btn-warning">
                         <i class="fa fa-edit"></i>
                         Modifier
                     </a>
