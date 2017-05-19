@@ -1,51 +1,28 @@
 <?php
+require_once __DIR__ . "/../config/parameters.php";
 
-function getAllRecettes() {
-    $liste_recettes = array();
+$connection = new PDO("mysql:dbname=" . $db["name"] . ";host=" . $db["host"], $db["user"], $db["pass"]);
+$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$connection->exec("SET names utf8");
+$connection->exec("SET lc_time_names = 'fr_FR'");
 
-    $liste_recettes[0] = array(
-        "id" => 0,
-        "title" => "Poulet mariné",
-        "img" => "recipe-1.jpg",
-        "description" => "Recette classique du poulet mariné...",
-        "nb_like" => 12,
-        "category" => "Plat",
-        "user" => "François P.",
-        "creationDate" => new DateTime("2016-09-12")
-    );
+$files = scandir(__DIR__ . "/entities");
+foreach ($files as $file) {
+    $ext = pathinfo(__DIR__ . "/entities/" . $file, PATHINFO_EXTENSION);
+    if (!is_dir($file) && $ext == "php") {
+        require_once __DIR__ . "/entities/" . $file;
+    }
+}
 
-    $liste_recettes[1] = array(
-        "id" => 1,
-        "title" => "Pancake chocolat banane",
-        "img" => "recipe-2.jpg",
-        "description" => "Délicieux pancake à la banane et au chocolat.",
-        "nb_like" => 42,
-        "category" => "Desert",
-        "user" => "Etienne H.",
-        "creationDate" => new DateTime("2016-09-10")
-    );
-
-    $liste_recettes[2] = array(
-        "id" => 2,
-        "title" => "Saumon Teriyaki",
-        "img" => "recipe-3.jpg",
-        "description" => "C'est bon le saumon :)",
-        "nb_like" => 95,
-        "category" => "Plat",
-        "user" => "François P.",
-        "creationDate" => new DateTime("2016-09-13")
-    );
+function countTable($table) {
+    global $connection;
     
-    return $liste_recettes;
+    $query = "SELECT COUNT(*) AS nb_lignes FROM $table";
+    
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+
+    $result = $stmt->fetch();
+    return $result["nb_lignes"];
 }
-
-function getRecette($identifiant) {
-    $liste_recettes = getAllRecettes();
-    return $liste_recettes[$identifiant];
-}
-
-
-
-
-
-

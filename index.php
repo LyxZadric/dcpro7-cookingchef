@@ -1,6 +1,7 @@
 <?php
 require_once 'model/database.php';
-$liste_recettes = getAllRecettes();
+$liste_recettes = getAllRecettes(3);
+$nb_recettes = countTable("recette");
 
 require_once 'layout/header.php';
 ?>
@@ -33,7 +34,7 @@ require_once 'layout/header.php';
 
     <h1>Découvrez nos dernières recettes Cooking Chef !</h1>
     <p>
-        Parcourez nos 284 recettes...
+        Parcourez nos <?php echo $nb_recettes; ?> recettes...
     </p>
 
     <section class="row recipes">
